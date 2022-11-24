@@ -1,0 +1,45 @@
+<div class="container w-25 mt-5">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <h1 class="mb-3 fw-bold text-center" style="color: #fc6a1c;">CleverSpace</h1>
+        <h3 class="mb-3 fw-normal mt-5" >Please sign in</h3>
+
+        <div class="form-floating">
+            <input type="email" formControlName="username" class="form-control" id="floatingInput" placeholder="name@example.com" (input)="onInputEmail()">
+            <label for="floatingInput">Email address <span class="aesterisk text-danger">*</span></label>
+            <div *ngIf="loginForm.get('username').invalid && (loginForm.get('username').dirty || loginForm.get('username').touched)">
+                <div *ngIf="loginForm.get('username').errors.required" class="form-control-feedback text-danger ms-2">Email is required!</div>
+                <div *ngIf="loginForm.get('username').errors?.pattern" class="form-control-feedback text-danger ms-2">Email is Invalid!</div>
+            </div>
+        </div>
+        <div class="form-floating" *ngIf="isPasssword">
+            <input type="password" formControlName="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Password <span class="aesterisk text-danger">*</span></label>
+            <div *ngIf="loginForm.get('password').invalid && (loginForm.get('password').dirty || loginForm.get('password').touched)">
+                <div *ngIf="loginForm.get('password').errors.required" class="form-control-feedback text-danger ms-2">Password is required!</div>
+            </div>
+        </div>
+        <div class="form-floating" *ngIf="isOTP && OTPsent">
+            <input type="text" maxlength="6" formControlName="otp" class="form-control" id="floatingPassword" placeholder="OTP">
+            <label for="floatingPassword">OTP <span class="aesterisk text-danger">*</span></label>
+            <div *ngIf="loginForm.get('otp').invalid && (loginForm.get('otp').dirty || loginForm.get('otp').touched)">
+                <div *ngIf="loginForm.get('otp').errors.required" class="form-control-feedback text-danger ms-2">OTP is required!</div>
+                <div *ngIf="loginForm.get('otp').errors.maxlength" class="form-control-feedback text-danger ms-2">OTP must be of 6 numbers.</div>
+                <div *ngIf="loginForm.get('otp').errors.minlength" class="form-control-feedback text-danger ms-2">OTP must be of 6 numbers.</div>
+            </div>
+        </div>
+        <div class="form-floating" *ngIf="isOTP && OTPsent" style="text-align: right;">
+            <button type="button" class="btn btn-sm mt-2 btn-secondary text-center border border-0 bg-white text-primary" (click)="sendOTP()">Resend OTP</button>
+        </div>
+        <div class="form-floating" *ngIf="isOTP && !OTPsent" style="text-align: right;">
+            <!-- <button type="button" class="btn btn-sm btn-secondary mt-1 float-end " style="background: none; border: none; color:blue"  (click)="sendOTP()">Send OTP</button> -->
+            <button type="button" class="btn btn-sm mt-2 btn-secondary text-center" [disabled]="isOtpDisabled"  (click)="sendOTP()">Send OTP</button>
+        </div>
+        <div class="form-floating mt-3 text-center" *ngIf="isPasssword">
+           <button type="button" class="btn mt-2 text-center" style="background: none; border: none; color:blue" (click)="enableOTP()">Login using OTP ?</button>
+        </div>
+        <div class="form-floating mt-3 text-center" *ngIf="isOTP">
+            <button type="button" class="mt-2 text-center" style="background: none; border: none; color:blue" (click)="enablePassword()">Login using Password ?</button>
+         </div>
+        <button class="w-100 btn btn-lg btn-primary mt-4" [disabled]="!loginForm.valid" type="submit">Log in</button>
+    </form>
+</div>
