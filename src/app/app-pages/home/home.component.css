@@ -1,0 +1,14 @@
+.nav-item {
+    padding-left: 30px;
+    padding-right: 30px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+}
+.list-group-item {
+    border: none
+}
+
+.navbar-sticky {
+    position: sticky;
+    top: 0;
+  }

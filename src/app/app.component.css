@@ -1,0 +1,10 @@
+/* body {
+    padding-top: 70px;
+  } */
+
+.nav-item {
+  padding-left: 30px;
+  padding-right: 30px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+}
